@@ -1,4 +1,7 @@
+const tables = require("../../database/tables");
+
 const categories = [
+
     {
       id: 1,
       name: "Science-Fiction",
@@ -11,9 +14,11 @@ const categories = [
   
   // Declare the actions
   
-  const browse = (req, res) => {
-    res.json(categories);
-  };
+  const browse = async (req, res) => {
+     const categoriesFromDB = await tables.category.readAll();
+    
+      res.json(categoriesFromDB);
+    };
   
   const read = (req, res) => {
     const parsedId = parseInt(req.params.id, 10);
